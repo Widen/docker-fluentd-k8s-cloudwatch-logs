@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-cloudwatch-logs
+  namespace: kube-system
+data:
+  aws-region: us-east-1
+  td-agent-config: |
+    <filter kubernetes.**>
+      type kubernetes_metadata
+    </filter>
+
+    <match fluent.**>
+      type null
+    </match>
+
+    <match kubernetes.**>
+      auto_create_stream true
+      log_group_name kubernetes
+      type cloudwatch_logs
+      use_tag_as_stream true
+    </match>
+
+    <match systemd.**>
+      auto_create_stream true
+      log_group_name systemd
+      log_stream_name %{hostname}
+      type cloudwatch_logs
+    </match>
+
+    <source>
+      format json
+      path /var/log/containers/*.log
+      pos_file /var/log/containers.log.pos
+      read_from_head true
+      tag kubernetes.*
+      time_format %Y-%m-%dT%H:%M:%S.%NZ
+      type tail
+    </source>
+
+    <source>
+      path /var/log/journal
+      pos_file /var/log/systemd.pos
+      read_from_head true
+      strip_underscores true
+      tag systemd
+      type systemd
+    </source>
