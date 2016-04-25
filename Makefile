@@ -1,6 +1,6 @@
 all: push
 
-VERSION = v0.6
+VERSION = v0.7
 BUILD_DATE = $(shell date +"%Y-%m-%d")
 
 TAG = $(VERSION)-$(BUILD_DATE)
@@ -17,5 +17,5 @@ push: tag
 	docker push $(PREFIX):$(VERSION)
 
 clean:
-	docker rmi -f $(PREFIX):$(TAG)
-	docker rmi -f $(PREFIX):$(VERSION)
+	docker rmi -f $(PREFIX):$(TAG) || true
+	docker rmi -f $(PREFIX):$(VERSION) || true
