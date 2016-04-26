@@ -1,4 +1,4 @@
-FROM quay.io/widen/debian-slim:8
+FROM quay.io/widen/debian:8
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV BUILD_DEPS "curl ca-certificates make g++"
@@ -14,8 +14,6 @@ RUN apt-get update && \
   ulimit -n 65536  && \
   apt-get -y --purge remove ${BUILD_DEPS} gcc cpp libffi6 libgmp10 && \
   apt-get -y --purge autoremove && apt-get -y clean && \
-  rm -rf \
-    /usr/share/doc /usr/share/man /usr/share/info /usr/share/locale \
-    /var/lib/apt/lists/* /var/log/* /var/cache/debconf/* /tmp/* /var/tmp/*
+  rm -rf /var/lib/apt/lists/* /var/cache/debconf/* /tmp/* /var/tmp/*
 
 ENTRYPOINT [ "td-agent" ]
