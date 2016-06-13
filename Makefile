@@ -10,7 +10,7 @@ build:
 	docker build --pull -t $(PREFIX):$(TAG) .
 
 tag: build
-	docker tag -f $(PREFIX):$(TAG) $(PREFIX):$(VERSION)
+	docker tag $(PREFIX):$(TAG) $(PREFIX):$(VERSION)
 
 push: tag
 	docker push $(PREFIX):$(TAG)
