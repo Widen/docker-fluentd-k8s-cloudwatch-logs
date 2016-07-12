@@ -16,4 +16,4 @@ RUN apt-get update && \
   apt-get -y --purge autoremove && apt-get -y clean && \
   rm -rf /var/lib/apt/lists/* /var/cache/debconf/* /tmp/* /var/tmp/*
 
-ENTRYPOINT [ "td-agent" ]
+CMD ["td-agent"]
