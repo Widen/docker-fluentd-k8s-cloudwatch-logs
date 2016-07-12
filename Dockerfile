@@ -1,4 +1,4 @@
-FROM quay.io/widen/debian:8
+FROM quay.io/widen/ubuntu:16.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV BUILD_DEPS "curl ca-certificates make g++"
@@ -7,7 +7,7 @@ ENV BUILD_DEPS "curl ca-certificates make g++"
 # sed: Changes the default user and group to root. Allows access to /var/log/docker/... files
 RUN apt-get update && \
   apt-get -y --no-install-recommends install ${BUILD_DEPS} sudo && \
-  curl -L https://toolbelt.treasuredata.com/sh/install-debian-jessie-td-agent2.sh | sh && \
+  curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-xenial-td-agent2.sh | sh && \
   sed -i -e "s/USER=td-agent/USER=root/" -e "s/GROUP=td-agent/GROUP=root/" /etc/init.d/td-agent && \
   td-agent-gem install --no-document fluent-plugin-kubernetes_metadata_filter \
     fluent-plugin-cloudwatch-logs fluent-plugin-systemd && \

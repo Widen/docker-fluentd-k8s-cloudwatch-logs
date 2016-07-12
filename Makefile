@@ -3,7 +3,7 @@ all: push
 VERSION = v0.7
 BUILD_DATE = $(shell date +"%Y-%m-%d")
 
-TAG = $(VERSION)-$(BUILD_DATE)
+TAG = $(VERSION)_$(BUILD_DATE)
 PREFIX = quay.io/widen/fluentd-k8s-cloudwatch-logs
 
 build:
