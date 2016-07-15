@@ -6,7 +6,7 @@ ENV BUILD_DEPS "curl ca-certificates make g++"
 # ulimit: Ensures there are enough file descriptors for running Fluentd
 # sed: Changes the default user and group to root. Allows access to /var/log/docker/... files
 RUN apt-get update && \
-  apt-get -y --no-install-recommends install ${BUILD_DEPS} sudo && \
+  apt-get -y --no-install-recommends install ${BUILD_DEPS} iproute2 sudo && \
   curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-xenial-td-agent2.sh | sh && \
   sed -i -e "s/USER=td-agent/USER=root/" -e "s/GROUP=td-agent/GROUP=root/" /etc/init.d/td-agent && \
   td-agent-gem install --no-document fluent-plugin-kubernetes_metadata_filter \
@@ -16,4 +16,4 @@ RUN apt-get update && \
   apt-get -y --purge autoremove && apt-get -y clean && \
   rm -rf /var/lib/apt/lists/* /var/cache/debconf/* /tmp/* /var/tmp/*
 
-CMD ["td-agent"]
+ENTRYPOINT ["td-agent"]

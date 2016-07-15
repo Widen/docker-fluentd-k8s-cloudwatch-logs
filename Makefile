@@ -1,6 +1,6 @@
 all: push
 
-VERSION = v0.7
+VERSION = v0.7.1
 BUILD_DATE = $(shell date +"%Y-%m-%d")
 
 TAG = $(VERSION)_$(BUILD_DATE)
