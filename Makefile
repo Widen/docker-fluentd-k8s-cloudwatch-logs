@@ -1,13 +1,21 @@
 all: push
 
-VERSION = v0.7.1
+VERSION = v0.8.0
+CLOUDWATCH_LOGS_PLUGIN_VERSION = 0.3.3
+KUBERNETES_PLUGIN_VERSION = 0.25.3
+SYSTEMD_PLUGIN_VERSION = 0.0.4
+
 BUILD_DATE = $(shell date +"%Y-%m-%d")
 
 TAG = $(VERSION)_$(BUILD_DATE)
 PREFIX = quay.io/widen/fluentd-k8s-cloudwatch-logs
 
 build:
-	docker build --pull -t $(PREFIX):$(TAG) .
+	docker build --pull \
+		--build-arg CLOUDWATCH_LOGS_PLUGIN_VERSION=$(CLOUDWATCH_LOGS_PLUGIN_VERSION) \
+		--build-arg KUBERNETES_PLUGIN_VERSION=$(KUBERNETES_PLUGIN_VERSION) \
+		--build-arg SYSTEMD_PLUGIN_VERSION=$(SYSTEMD_PLUGIN_VERSION) \
+		-t $(PREFIX):$(TAG) .
 
 tag: build
 	docker tag $(PREFIX):$(TAG) $(PREFIX):$(VERSION)
