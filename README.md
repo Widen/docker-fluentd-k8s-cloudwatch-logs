@@ -1,4 +1,4 @@
-# Fluentd Docker image
+# Fluentd Docker images
 
 [![Docker Repository on Quay](https://quay.io/repository/widen/fluentd-k8s-cloudwatch-logs/status "Docker Repository on Quay")](https://quay.io/repository/widen/fluentd-k8s-cloudwatch-logs)
 
