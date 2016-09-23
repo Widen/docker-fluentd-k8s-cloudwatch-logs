@@ -1,14 +1,14 @@
 all: push
 
-VERSION = v0.9.4
+VERSION = $(shell git rev-parse --abbrev-ref HEAD)
 CLOUDWATCH_LOGS_PLUGIN_VERSION = 0.3.3
 FLATTEN_HASH_PLUGIN_VERSION = 0.4.0
 KUBERNETES_PLUGIN_VERSION = 0.25.3
 SYSTEMD_PLUGIN_VERSION = 0.0.4
 
-BUILD_DATE = $(shell date +"%Y-%m-%d")
+BUILD_DATE = $(shell date +"%Y%m%d")
 
-TAG = $(VERSION)_$(BUILD_DATE)
+TAG = $(VERSION)-$(BUILD_DATE)
 PREFIX = quay.io/widen/fluentd-k8s-cloudwatch-logs
 
 build:
