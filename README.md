@@ -8,6 +8,6 @@
 Images are tagged as follows:
 
  - $VERSION
- - $VERSION-$BUILD_DATE
+ - $VERSION-$UNIX_TIMESTAMP
 
-Images without a build date appended are always the most recent.
+Images without a timestamp appended are always the most recent.

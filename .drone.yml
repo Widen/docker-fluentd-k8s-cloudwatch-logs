@@ -1,0 +1,27 @@
+pipeline:
+  docker:
+    image: plugins/docker
+    build_args:
+      - CLOUDWATCH_LOGS_PLUGIN_VERSION=0.3.4
+      - FLATTEN_HASH_PLUGIN_VERSION=0.4.0
+      - KUBERNETES_PLUGIN_VERSION=0.25.3
+      - SYSTEMD_PLUGIN_VERSION=0.0.4
+    email: .
+    force_tag: true
+    insecure: false
+    registry: https://quay.io
+    repo: quay.io/widen/fluentd-k8s-cloudwatch-logs
+    tags:
+      - ${DRONE_BRANCH}
+      - ${DRONE_BRANCH}-${DRONE_BUILD_CREATED}
+
+  slack:
+    image: plugins/slack-blame
+    channel: drone
+    failure_template: |
+      @{{ user.name }} failed to build/push the `{{ repo.name }}` image.
+    failure_username: ${DRONE_REPO_NAME}
+    mapping: { "mgoodness@gmail.com": "mgoodness" }
+    success_template: |
+      @{{ user.name }} built & pushed the `{{ repo.name }}` image.
+    success_username: ${DRONE_REPO_NAME}
