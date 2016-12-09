@@ -3,9 +3,9 @@ pipeline:
     image: plugins/docker
     build_args:
       - CLOUDWATCH_LOGS_PLUGIN_VERSION=0.3.4
-      - FLATTEN_HASH_PLUGIN_VERSION=0.4.0
-      - KUBERNETES_PLUGIN_VERSION=0.25.3
-      - SYSTEMD_PLUGIN_VERSION=0.0.4
+      - FLATTEN_HASH_PLUGIN_VERSION=0.5.0
+      - KUBERNETES_PLUGIN_VERSION=0.26.2
+      - SYSTEMD_PLUGIN_VERSION=0.0.5
     email: .
     force_tag: true
     insecure: false
