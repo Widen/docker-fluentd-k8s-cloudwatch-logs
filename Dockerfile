@@ -6,9 +6,6 @@ ENV BUILD_DEPS "curl ca-certificates make g++"
 ARG CLOUDWATCH_LOGS_PLUGIN_VERSION
 ENV CLOUDWATCH_LOGS_PLUGIN_VERSION ${CLOUDWATCH_LOGS_PLUGIN_VERSION}
 
-ARG FLATTEN_HASH_PLUGIN_VERSION
-ENV FLATTEN_HASH_PLUGIN_VERSION ${FLATTEN_HASH_PLUGIN_VERSION}
-
 ARG KUBERNETES_PLUGIN_VERSION
 ENV KUBERNETES_PLUGIN_VERSION ${KUBERNETES_PLUGIN_VERSION}
 
@@ -23,7 +20,6 @@ RUN apt-get update && \
   sed -i -e "s/USER=td-agent/USER=root/" -e "s/GROUP=td-agent/GROUP=root/" /etc/init.d/td-agent && \
   td-agent-gem install --no-document \
     fluent-plugin-cloudwatch-logs:${CLOUDWATCH_LOGS_PLUGIN_VERSION} \
-    fluent-plugin-flatten-hash:${FLATTEN_HASH_PLUGIN_VERSION} \
     fluent-plugin-kubernetes_metadata_filter:${KUBERNETES_PLUGIN_VERSION} \
     fluent-plugin-systemd:${SYSTEMD_PLUGIN_VERSION} && \
   ulimit -n 65536  && \
